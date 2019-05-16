@@ -16,6 +16,7 @@ create table users(
     userEmail   varchar(50) not null,
     userPwd     varchar(128) not null,
     userBio     varchar(280),
+    stageName   varchar(50),
     verified    tinyint(1) default 0,
     constraint  pk_users primary key (pseudo),
     unique key  uk_email (userEmail)
@@ -39,6 +40,7 @@ create table genres(
 create table songs(
     songId      integer not null,
     songTitle   varchar(64),
+    songDetails varchar(280),
     albumId     integer not null,
     genreId     integer,
     constraint  pk_songs primary key (songId),
