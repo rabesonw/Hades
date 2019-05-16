@@ -8,7 +8,7 @@ app.get("/", function (req, res, next) {
     res.send("Homepage");
 });
 
-var routes = require("./app/routes");
+var routes = require("./routes");
 app.use("/", routes);
 
 app.use("*", function (req, res) {
