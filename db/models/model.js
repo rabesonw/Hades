@@ -26,6 +26,27 @@ exports.modelHandler = function (table) {
     }
 
     /**
+     * builds the where condition for a search query from {keys: values}
+     * 
+     * {key1: value1, key2: value2} becomes
+     * where key1 like value1 and key2 like value2
+     * @param {*} table 
+     */
+    function clauseBuilderSearch(clause) {
+        var statement = "";
+        var linkWord = "where ";
+        if (clause.length == 0) {
+            return statement;
+        } else {
+            for(let key in clause) {
+                statement += linkWord + key + " like " + connection.escape(clause[key]);
+                linkWord = "and ";
+            }
+        }
+        return statement;
+    }
+
+    /**
      * transforms [ values ] into a comma separated string
      * 
      * [value1, value2] becomes "value1, value2"
@@ -95,6 +116,22 @@ exports.modelHandler = function (table) {
         let sql = "select " + commaSeparator(fields) 
         + " from " + commaSeparator(table) 
         + clauseBuilderQuery(clause) + " ;";
+        connection.query(sql, function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else if (next) {
+                next(results, error);
+            }
+        });
+    }
+
+    /**
+     * select columns from tables where conditions, using like and not =
+     */
+    .readSearch = function(fields, clause, next) {
+        let sql = "select " + commaSeparator(fields) 
+        + " from " + commaSeparator(table) 
+        + clauseBuilderSearch(clause) + " ;";
         connection.query(sql, function (error, results, fields) {
             if (error) {
                 throw error;

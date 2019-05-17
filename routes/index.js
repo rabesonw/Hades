@@ -49,6 +49,7 @@ router.use("/:idUser/albums", routeIdUser, require("./albums"))
 .use("./:idUser/songs", routeIdUser, require("./songs"));
 
 router.use("/auth", require("./auth"))
+.use("./users", require("./users/users"))
 .use("/playlists", require("./playlists"))
 .use("/albums", require("./albums"))
 .use("/followers", require("./followers"))
