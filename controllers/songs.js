@@ -2,19 +2,29 @@ var table = "songs";
 var model = require("../db/models/model")(table);
 var auth = require("../middlewares/auth");
 
-exports.songs = {
-    getAllSongs = function (req, res) {
+var songs = {};
+    songs.getAllSongs = function (req, res) {
         let fields = ["songId", "songTitle"];
         model.readAll(fields, {}, function (results) {
             res.json(results);
         });
     }
 
-    .addSong = function (req, res) {
+    /**
+     * insert into songs (songTitle, songDetails, albumId, genreId)
+     */
+    songs.addSong = function (req, res) {
         model.create(req.body);
     }
 
-    .getSong = function (req, res) {
+    /**
+     * insert into play values (songId, playlistId)
+     */
+    songs.addSongToPlaylist = function(req, res) {
+        model.create(req.body)
+    }
+
+    songs.getSong = function (req, res) {
         let fields = ["songId"];
         let clause = {"songId": req.idSong};
         model.read(fields, function (results) {
@@ -22,12 +32,13 @@ exports.songs = {
         });
     }
 
-    .updateSong = function (req, res) {
+   songs.updateSong = function (req, res) {
         model.update(req.body);
     }
 
-    .deleteSong = function (req, res) {
+    songs.deleteSong = function (req, res) {
         let clause = {"songId": req.idSong};
         model.delete(req.body, clause);
     }
-};
+
+module.exports = songs;

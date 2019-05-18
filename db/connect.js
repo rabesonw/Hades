@@ -1,15 +1,17 @@
+dotenv.config();
+
 var mysql = require("mysql");
 
 var connection = mysql.createConnection(
     {
-        host: "",
-        user: "",
-        password: "",
-        database: "" //path to database
+        host: process.env.HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_KEY,
+        database: process.env.DB_URL //path to database
     }
 );
 
-connection.connect(function (err) {
+connection.connect(process.env.DB_URL,function (err) {
     if (err) throw err;
 });
 
