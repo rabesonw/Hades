@@ -1,16 +1,34 @@
-var express = require("express");
+global.dotenv = require("dotenv");
 
+var path = require("path");
+
+global.rootPath = path.resolve(__dirname);
+
+var express = require("express");
+var bodyParser = require("body-parser");
+var routes = require("./routes");
 var app = express();
 
-port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
+
+var pageBuild = require("./middlewares/page");
+
+app.set("view engine", "ejs");
 
 app.get("/", function (req, res, next) {
-    res.send("Homepage");
+    var page = pageBuild("index");
+    res.render(page, {
+        title: "Hades",
+    });
 });
 
 app.set("view engine", "ejs");
 
 var routes = require("./routes");
+app.use(bodyParser.json());
+
+//means that it supports encoded bodies
+app.use(bodyParser.urlencoded({extended: true}));
 app.use("/", routes);
 
 app.use("*", function (req, res) {
