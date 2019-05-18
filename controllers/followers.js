@@ -1,6 +1,7 @@
 var table = "follow";
 var model = require("../db/models/model")(table);
 var auth = require("../middlewares/auth");
+var pageName = require(rootPath+"/middlewares/auth");
 
 var followers = {};
     /*
@@ -16,8 +17,17 @@ var followers = {};
         let model = require("../db/models/model")(table);
         let fields = ["followerId", "userSurname", "userName"];
         let clause = {"followedId": req.idUser};
-        model.readAll(fields, clause, function (results) {
-            res.json(results);
+        model.readAll(fields, clause, function (results, err) {
+            if(!err && results.length > 0) {
+                var page = pageName("followers");
+                res.render(page, {
+                    title: "Followers",
+                    followers: results
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
         });
     }
 
@@ -30,7 +40,17 @@ var followers = {};
      * values (req.idFollower, req.idUser)
      */
     followers.addFollower = function (req, res) {
-        model.create(req.body);
+        model.create(req.body, function(results, err) {
+            if(!err && results.affectedRows > 0) {
+                var page = pageName("followers");
+                res.render(page, {
+                    title: "Followers"
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
+        });
     }
 
     /**
@@ -39,16 +59,36 @@ var followers = {};
      * select followerId from users u where u.pseudo = followerId
      */
     followers.getFollower = function (req, res) {
-        let fields = ["followerId"];
+        let fields = ["*"];
         let clause = {"followerId": req.idFollower};
-        model.read(fields, clause, function (results) {
-            res.json(results);
+        model.read(fields, clause, function (results, err) {
+            if(!err && results.length > 0) {
+                var page = pageName("user");
+                res.render(page, {
+                    title: results[0],
+                    info: results
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
         });
     }
 
     followers.deleteFollower = function (req, res) {
         let clause = {"followerId": req.idFollower};
-        model.delete(clause);
+        model.delete(clause, function(results, err) {
+            if(!err && results.affectedRows > 0) {
+                var page = pageName("following");
+                res.render(page, {
+                    title: "Following",
+                    following: results
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
+        });
     }
 
 module.exports = followers;

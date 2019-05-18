@@ -11,10 +11,15 @@ var app = express();
 
 const port = process.env.PORT || 8000;
 
-// app.set("view engine", "ejs");
+var pageBuild = require("./middlewares/page");
+
+app.set("view engine", "ejs");
 
 app.get("/", function (req, res, next) {
-    res.sendFile(rootPath+"/public/index.html");
+    var page = pageBuild("index");
+    res.render(page, {
+        title: "Hades",
+    });
 });
 
 app.use(bodyParser.json());

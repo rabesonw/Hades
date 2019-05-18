@@ -1,6 +1,7 @@
 var table = "follow";
 var model = require("../db/models/model")(table);
 var auth = require("../middlewares/auth");
+var pageName = require(rootPath+"/middlewares/auth");
 
 var following = {};
     /*
@@ -16,8 +17,17 @@ var following = {};
         let model = require("../db/models/model")(table);
         let fields = ["followedId", "userSurname", "userName"];
         let clause = {"followerId": "pseudo"};
-        model.readAll(fields, clause, function (results) {
-            res.json(results);
+        model.readAll(fields, clause, function (results, err) {
+            if(!err && results.length > 0) {
+                var page = pageName("following");
+                res.render(page, {
+                    title: "Following",
+                    following: results
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
         });
     }
 
@@ -30,25 +40,55 @@ var following = {};
      * values (followerId, idUser)
      */
     following.addFollowing = function (req, res) {
-        model.create(req.body);
+        model.create(req.body, function(results, err) {
+            if(!err && results.affectedRows > 0) {
+                var page = pageName("following");
+                res.render(page, {
+                    title: "Following"
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
+        });
     }
 
     /**
-     * gets id of followed
+     * gets info of followed
      * 
-     * select followedId from users u where u.pseudo = followedId
+     * select * from users u where u.pseudo = followedId
      */
     following.getFollowing = function (req, res) {
-        let fields = ["followedId"];
-        let clause = {"followedId": req.idFollower};
-        model.read(fields, clause, function (results) {
-            res.json(results);
+        let fields = ["*"];
+        let clause = {"followedId": req.idFollowed};
+        model.read(fields, clause, function (results, err) {
+            if(!err && results.length > 0) {
+                var page = pageName("user");
+                res.render(page, {
+                    title: results[0],
+                    info: results
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
         });
     }
 
     following.deleteFollowing = function (req, res) {
         let clause = {"followedId": req.idFollower};
-        model.delete(clause);
+        model.delete(clause, function(results, err) {
+            if(!err && results.affectedRows > 0) {
+                var page = pageName("following");
+                res.render(page, {
+                    title: "Following",
+                    following: results
+                });
+            } else {
+                err.addMessage("404", "User not found");
+                err.sendErrors(res, 404);
+            }
+        });
     }
 
 module.exports = following;

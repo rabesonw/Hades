@@ -81,6 +81,11 @@ var search = {};
                     jsonResults["songResults"] = results;
                     if(!err && results.length >= 0) {
                         res.json(jsonResults);
+                        res.render("search", {
+                            title: "Results : ("+results.length+")",
+                            matches: results.length, 
+                            content: results
+                        })
                     } else {
                         error.addMessage("409", "Query failed");
                         error.sendErrors(res, 404);

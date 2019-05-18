@@ -4,6 +4,7 @@ var error = require(rootPath+"/middlewares/error");
 var crypt = require("bcrypt");
 var mail = require("email-validator");
 var auth = require(rootPath+"/middlewares/auth");
+var pageBuild = require(rootPath+"/middlewares/page");
 
 var users = {};
 
@@ -17,7 +18,11 @@ var users = {};
     users.getAllUsers = function (req, res, next) {
         let fields = ["pseudo", "userSurname", "userName","verified"];
         model.readAll(fields, {}, function (results) {
-            res.sendFile(rootPath+"/public/user.html");
+            var page = pageBuild("users");
+            res.render(page, {
+                title: "Users", 
+                users: results
+            });          
         });
     }
 
@@ -71,7 +76,11 @@ var users = {};
                 req.body.userPwd = hash;
                 model.create(req.body), function(results, err) {
                     if(!err && results.affectedRows != 0) {
-                        res.sendFile(rootPath+"/public/user.html");
+                        var page = pageBuild("user");
+                        res.render(page, {
+                            title: results[0],
+                            status: "connected"
+                        });  
                     }
                 };
             });
@@ -79,12 +88,15 @@ var users = {};
     }
 
     users.getUser = function (req, res, next) {
-        let fields = ["pseudo"];
+        let fields = ["*"];
         var clause = {"pseudo": req.idUser};
         model.read(fields, clause, function(results, err) {
             if(!err && results.length > 0) {
-                console.log("controllers.users : OK");
-                res.sendFile(rootPath+"/public/user.html");                
+                var page = pageBuild("user");
+                res.render(page, {
+                    title: results[0],
+                    info: results
+                });
             } else {
                 console.log("controllers.users : NOT OK");
                 err.addMessage("404", "User not found");
@@ -100,7 +112,10 @@ var users = {};
                 var clause = {"pseudo": req.idUser};
                 model.update(req.body, clause, function(results, err) {
                     if(!err && results.affectedRows != 0) {
-                        res.sendFile(rootPath+"/public/user.html");
+                        var page = pageBuild("user");
+                        res.render(page, {
+                            title: results[0]
+                        });
                     } else {
                         err.addMessage("404", "User not found");
                         err.sendErrors(res, 404);
@@ -115,7 +130,11 @@ var users = {};
             var clause = {"pseudo": req.idUser};
             model.delete(clause, function(results, err) {
                 if(!err && results.affectedRows != 0) {
-                    res.sendFile(rootPath+"/index.html");
+                    var page = pageBuild("index");
+                    res.render(page, {
+                        title: "Hades",
+                        status: "disconnected"
+                    });
                 } else {
                     err.addMessage("404", "User not found");
                     err.sendErrors(res, 404);

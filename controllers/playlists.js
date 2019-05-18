@@ -1,6 +1,7 @@
 var table = "playlists";
 var model = require(rootPath+"/db/models/model")(table);
 var auth = require(rootPath+"/middlewares/auth");
+var pageName = require(rootPath+"/middlewares/auth");
 
 var playlists = {};
 
@@ -9,15 +10,28 @@ var playlists = {};
      */
     playlists.getAllPlaylists = function (req, res, next) {
         let fields = ["playlistId", "playlistName", "ownerId"];
-        model.readAll(fields, {}, function (results) {
-            res.sendFile(rootPath+"/public/playlist.html");
+        let clause = {"ownerId": req.idUser};
+        model.readAll(fields, clause, function (results, err) {
+            if(!err && results.length > 0) {
+                var page = pageName("playlists");
+                res.render(page, {
+                    title: "Your Playlists",
+                    playlists: results
+                });
+            } else {
+                err.addMessage("404", "Playlist not found");
+                err.sendErrors(res, 404);
+            }
         });
     }
 
     playlists.addPlaylist = function (req, res) {
         model.create(req.body, function(results, err) {
             if(!err && results.affectRows != 0) {
-                res.sendFile(rootPath+"/public/user.html");
+                var page = pageName("playlist");
+                res.render(page, {
+                    title: results[1]
+                });  
             }
         });
     }
@@ -31,10 +45,19 @@ var playlists = {};
      * and playlists.playlistId = play.playlistId
      */
     playlists.getPlaylist = function (req, res, next) {
-        let fields = ["playlistId"];
+        let fields = ["*"];
         let clause = {"playlistId": req.idPlaylist};
-        model.read(fields, clause, function (results) {
-            res.sendFile(rootPath+"/public/user.html");
+        model.read(fields, clause, function (results, err) {
+            if(!err && results.length > 0) {
+                var page = pageName("playlist");
+                res.render(page, {
+                    title: results[1],
+                    info: results
+                });
+            } else {
+                err.addMessage("404", "Playlist not found");
+                err.sendErrors(res, 404);
+            }
         });
     }
 
@@ -43,15 +66,35 @@ var playlists = {};
      */
     playlists.updatePlaylist = function (req, res, next) {
         let clause = {"playlistId": req.idPlaylist};
-        model.update(req.body, clause );
+        model.update(req.body, clause, function(results, err) {
+            if(!err && results.affectedRows > 0) {
+                var page = pageName("playlist");
+                res.render(page, {
+                    title: results[1]
+                });
+            } else {
+                err.addMessage("404", "Playlist not found");
+                err.sendErrors(res, 404);
+            }
+        });
     }
 
     /**
-     * delete from playlist where playlistId = value
+     * delete from playlist where playlistId = req.idPlaylist
      */
     playlists.deletePlaylist = function (req, res) {
         let clause = {"playlistId": req.idPlaylist};
-        model.delete(clause);
+        model.delete(clause, function(results, err) {
+            if(!err && results.affectedRows > 0) {
+                var page = pageName("index");
+                res.render(page, {
+                    title: "Hades"
+                });
+            } else {
+                err.addMessage("404", "Playlist not found");
+                err.sendErrors(res, 404);
+            }
+        });
     }
 
 module.exports = playlists;
