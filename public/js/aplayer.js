@@ -2,7 +2,7 @@
 // // var playlist = require("./")
 
 var options = {
-    element: document.getElementById("aplayer"),
+    container: document.getElementById("player"),
 
     // listFolded: true,
     // listMaxHeight: 100,
@@ -12,8 +12,8 @@ var options = {
     // prelaod: "auto",
     // mutex: true,
 
-    // fixed: true,
-    mini: true,
+    fixed: true,
+    // mini: false,
 
     // order: "list",
     
@@ -42,3 +42,7 @@ setTheme(player.list.index);
 player.on("listswitch", function(data) {
     setTheme(data.index);
 });
+
+/**
+ * todo : add function to change 
+ */

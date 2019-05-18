@@ -8,6 +8,8 @@ app.get("/", function (req, res, next) {
     res.send("Homepage");
 });
 
+app.set("view engine", "ejs");
+
 var routes = require("./routes");
 app.use("/", routes);
 
