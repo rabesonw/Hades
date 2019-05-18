@@ -1,5 +1,16 @@
 var express = require("express");
 var router = express.Router();
+var following = require("../controllers/following");
+var auth = require("../middlewares/auth");
+var users = require("./index");
+
+/*
+    idFollowing for other resources
+*/
+const routeIdFollowed = (req, res, next) => {
+    req.idFollowing = req.params.followedId;
+    next();
+}
 
 /*
     Following routing
@@ -7,36 +18,19 @@ var router = express.Router();
     display list of people followed by idUser
     unfollows 
 */
+console.log("root/following : START");
 router.route("/")
-.get(function (req, res) {
-    res.send(`GET /${req.idUser}/following`)
-})
-.delete(function (req, res) {
-    res.send(`DELETE /${req.idUser}/following/${req.params.idFollowed}`)
-})
+.get(auth.readToken, following.getAllFollowing)
+.put(routeIdFollowed, auth.readToken, following.addFollowing);
 
 /*
-    /idUser/following
-*/
-router.route("/:idUser")
-.get(function (req, res) {
-    res.send(`GET /${req.params.idUser}/following`)
-})
-.put(function (req, res) {
-    res.send(`PUT /${req.params.idUser}/following/${req.params.idFollowed}`)
-});
-
-/*
-    /following/idFollowed
-    display page of the person followed by idUser
-    unfollows
+    /idFollower
+    get idFollower's page
+    follow idFollower back
 */
 router.route("/:idFollowed")
-.get(function (req, res) {
-    res.send(`GET /${req.params.idFollowed}`)
-})
-.delete(function (req, res) {
-    res.send(`DELETE /${req.params.idUser}/following/${req.params.idFollowed}`)
-});
+.get(routeIdFollowed, following.getFollowing)
+.put(routeIdFollowed, auth.readToken, following.addFollowing);
+console.log("root/following : OK");
 
 module.exports = router;

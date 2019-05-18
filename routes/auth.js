@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var auth = require("../middlewares/auth");
 
 /*
     /auth
@@ -7,11 +8,11 @@ var router = express.Router();
     log out
 */
 router.route("/")
-.post(function (req, res, next) {
-    res.send('POST /auth')
+.post(auth.login, () => {
+    res.sendFile(rootPath+"/public/user.html");
 })
-.delete(function (req, res) {
-    res.send('DELETE /auth')
+.delete(auth.logout, () => {
+    res.sendFile(rootPath+"/public/index.html");
 });
 
 module.exports = router;
