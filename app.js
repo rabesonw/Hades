@@ -1,18 +1,26 @@
+global.dotenv = require("dotenv");
+
+var path = require("path");
+
+global.rootPath = path.resolve(__dirname);
+
 var express = require("express");
 var bodyParser = require("body-parser");
 var routes = require("./routes");
 var app = express();
 
-port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
+
+// app.set("view engine", "ejs");
 
 app.get("/", function (req, res, next) {
-    res.send("Homepage");
+    res.sendFile(rootPath+"/public/index.html");
 });
 
 app.use(bodyParser.json());
 
 //means that it supports encoded bodies
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}));
 app.use("/", routes);
 
 app.use("*", function (req, res) {

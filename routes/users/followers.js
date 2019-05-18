@@ -1,37 +1,37 @@
 var express = require("express");
 var router = express.Router();
+var follower = require(rootPath+"/controllers/followers");
+var auth = require(rootPath+"/middlewares/auth");
+// var users = require("./index");
+
+/*
+    idFollower for other resources
+*/
+const routeIdFollower = (req, res, next) => {
+    req.idFollower = req.params.followerId;
+    next();
+}
 
 /*
     Followers routing
     /followers
     display list of people who follow idUser
-    follows back (should be /users/${req.params.idUser}/following/${idFollower} ???)
+    follows back idFollower
 */
+console.log("/idUser/followers : START");
 router.route("/")
-.get(function (req, res) {
-    res.send(`GET /${req.idUser}/followers`)
-})
-.put(function (req, res) {
-    res.send(`PUT /${req.idUser}/following/${req.params.idFollower}`)
-});
+.get(routeIdFollower, auth.readToken, follower.getAllFollowers)
+.put(routeIdFollower, auth.readToken, follower.addFollower);
 
 /*
-    /idUser/followers
+    /idFollower
+    get idFollower's page
+    follow idFollower back
 */
-router.route("/:idUser")
-.get(function (req, res) {
-    res.send(`GET /${req.params.idUser}/followers`)
-})
-.put(function (req, res) {
-    res.send(`PUT /${req.params.idUser}/following/${req.params.idFollower}`)
-});
-
 router.route("/:idFollower")
-.get(function (req, res, next) {
-    res.send(`GET /${req.params.idFollower}`)
-})
-.put(function (req, res) {
-    res.send(`PUT /${req.idUser}/following/${req.params.idFollower}`)
-});
+.get(routeIdFollower, follower.getFollower)
+.put(routeIdFollower, auth.readToken, follower.addFollower);
+console.log("/idUser/followers : OK");
+
 
 module.exports = router;

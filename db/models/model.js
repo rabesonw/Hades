@@ -1,9 +1,5 @@
 var connection = require("../connect");
 
-exports.modelHandler = function (table) {
-
-    var model = {};
-
     /**
      * builds the where condition for a query from {keys: values}
      * 
@@ -109,6 +105,10 @@ exports.modelHandler = function (table) {
         return statement;
     }
 
+module.exports = function (table) {
+
+    var model = {};
+    
     /**
      * select columns from tables where conditions
      */
@@ -128,7 +128,7 @@ exports.modelHandler = function (table) {
     /**
      * select columns from tables where conditions, using like and not =
      */
-    .readSearch = function(fields, clause, next) {
+    model.readSearch = function(fields, clause, next) {
         let sql = "select " + commaSeparator(fields) 
         + " from " + commaSeparator(table) 
         + clauseBuilderSearch(clause) + " ;";
@@ -144,23 +144,23 @@ exports.modelHandler = function (table) {
     /**
      * select column from table where conditions
      */
-    .read = function (fields, clause, next) {
+    model.read = function (fields, clause, next) {
         let sql = "select " + commaSeparator(fields) 
         + " from " + commaSeparator(table) 
         + clauseBuilderQuery(clause) + " ;";
         connection.query(sql, function (error, results, fields) {
-            if (error) {
-                throw error;
-            } else if (next) {
+            // if (error) {
+            //     throw error;
+            // } else if (next) {
                 next(results, error);
-            }
+            // }
         });
     }
 
     /*
         insert into _table_ (field1, field2) values (values1, values2) where condition
     */
-    .create = function (values, clause, next) {
+    model.create = function (values, clause, next) {
         var columns = getFields(values);
         var input = getValues(values)
         let sql = "insert into " + commaSeparator(table) 
@@ -178,7 +178,7 @@ exports.modelHandler = function (table) {
     /**
      *  update _table_ set colums = values where conditions
      */
-    .update = function (values, clause, next) {
+    model.update = function (values, clause, next) {
         let sql = "update " + commaSeparator(table) 
         + " set " + updateBuilder(values) 
         + clauseBuilderQuery(clause) + ";";
@@ -194,7 +194,7 @@ exports.modelHandler = function (table) {
     /**
      *  delete from _table_ where conditions
      */
-    .delete = function (clause, next) {
+    model.delete = function (clause, next) {
         let sql = "delete from " + commaSeparator(table) 
         + clauseBuilderQuery(clause);
         connection.query(sql, function (error, results, fields) {

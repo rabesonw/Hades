@@ -1,6 +1,7 @@
 -- sql script to create database for Hades web project
 
 drop table follow;
+drop table play;
 drop table playlists;
 drop table songs;
 drop table genres;
@@ -28,17 +29,17 @@ create table albums(
     albumAuthor varchar(50),
     posterId    varchar(25) not null,
     constraint  pk_albums primary key (albumId),
-    constraint  fk_albums_users (posterId) references users(pseudo) on delete cascade
+    constraint  fk_albums_users foreign key (posterId) references users(pseudo) on delete cascade
 );
 
 create table genres(
     genreId     integer not null auto_increment,
     genreName   varchar(32),
-    constraint  pk_genres (genreId)
+    constraint  pk_genres primary key (genreId)
 );
 
 create table songs(
-    songId      integer not null,
+    songId      integer not null auto_increment,
     songTitle   varchar(64),
     songDetails varchar(280),
     albumId     integer not null,
@@ -57,10 +58,30 @@ create table playlists(
     constraint      fk_playlists_users foreign key (ownerId) references users(pseudo) on delete cascade
 );
 
+create table play(
+    songId      integer not null,
+    playlistId  integer not null,
+    constraint pk_play primary key (songId, playlistId),
+    constraint fk_songs_songs foreign key (songId) references songs(songId),
+    constraint fk_songs_playlists foreign key (playlistId) references playlists(playlistId) on delete cascade
+);
+
 create table follow(
     followedId  varchar(25),
     followerId  varchar(25),
     constraint  pk_follow primary key (followedId, followerId),
     constraint  fk_followed_users foreign key (followedId) references users(pseudo) on delete cascade,
     constraint  fk_follower_users foreign key (followerId) references users(pseudo) on delete cascade
-)
+);
+
+-- triggers declarations 
+
+-- t_songs_albums
+-- a trigger to remove an album when its last song has been removed
+create trigger t_songs_albums 
+after delete on songs
+begin
+    
+
+-- t_playlists_users
+-- a trigger to create a new playlist for liked songs when user creates an account

@@ -1,11 +1,11 @@
 var table = "users";
-var model = require("../db/models/model")(table);
-var error = require("../middlewares/error");
+var model = require(rootPath+"/db/models/model")(table);
+var error = require(rootPath+"/middlewares/error");
 var crypt = require("bcrypt");
 var mail = require("email-validator");
-var auth = require("../middlewares/auth");
+var auth = require(rootPath+"/middlewares/auth");
 
-exports.users = {
+var users = {};
 
     /**
      * gets pseudo, user's name, user's surname and verified status
@@ -14,14 +14,14 @@ exports.users = {
      * select u.pseudo, u.userName, u.userSurname, u.verified
      * from users
      */
-    getAllUsers = function (req, res) {
+    users.getAllUsers = function (req, res, next) {
         let fields = ["pseudo", "userSurname", "userName","verified"];
         model.readAll(fields, {}, function (results) {
-            res.json(results);
+            res.sendFile(rootPath+"/public/user.html");
         });
     }
 
-    .checkParams = function(req, res, next) {
+    users.checkParams = function(req, res, next) {
         if (!req.body.idUser || !req.body.userEmail || !req.body.userPwd) {
             error.addMessage("400", "Bad Request : missing field");
         }
@@ -46,10 +46,15 @@ exports.users = {
         }
     }
 
-    .checkUser = function (req, res, next) {
-        //TODO verify the token
-        //error 403 if not the right user
-        //else next
+    users.checkUser = function (req, res, next) {
+        auth.checkToken(req, res, function(data) {
+            if (data.user.pseudo != req.idUser) {
+                error.addMessage(403, "Forbidden");
+                error.sendErrors(res, 403);
+            } else {
+                next();
+            }
+        })
     }
     
     /**
@@ -59,51 +64,64 @@ exports.users = {
      * password rules : 8 characters minimum, no spaces
      * email : checked by email-validator, unique
      */
-    .addUser = function (req, res) {
+    users.addUser = function (req, res) {
         checkParams(req, res, function() {
             // creating the user
             crypt.hash(req.body.userPwd, 10, function(err, hash) {
                 req.body.userPwd = hash;
                 model.create(req.body), function(results, err) {
                     if(!err && results.affectedRows != 0) {
-                        res.status(201).json({"pseudo": req.body.idUser});
+                        res.sendFile(rootPath+"/public/user.html");
                     }
                 };
             });
-        })
+        });
     }
 
-    .getUser = function (req, res) {
+    users.getUser = function (req, res, next) {
         let fields = ["pseudo"];
         var clause = {"pseudo": req.idUser};
         model.read(fields, clause, function(results, err) {
             if(!err && results.length > 0) {
-                res.json(results[0]);
+                console.log("controllers.users : OK");
+                res.sendFile(rootPath+"/public/user.html");                
             } else {
+                console.log("controllers.users : NOT OK");
                 err.addMessage("404", "User not found");
                 err.sendErrors(res, 404);
             }
         });
     }
 
-    .updateUser = function (req, res) {
-        
+    users.updateUser = function (req, res, next) {
         checkParams(req, res, function() {
             crypt.hash(req.body.userPwd, 10, function(err, hash) {
                 req.body.userPwd = hash;
                 var clause = {"pseudo": req.idUser};
                 model.update(req.body, clause, function(results, err) {
                     if(!err && results.affectedRows != 0) {
-                        res.status(204);
+                        res.sendFile(rootPath+"/public/user.html");
+                    } else {
+                        err.addMessage("404", "User not found");
+                        err.sendErrors(res, 404);
                     }
                 });
             });
-        })
-
+        });
     }
 
-    .deleteUser = function (req, res) {
-        var clause = {"pseudo": req.idUser};
-        model.delete(clause);
+    users.deleteUser = function (req, res) {
+        users.checkUser(req, res, function() {
+            var clause = {"pseudo": req.idUser};
+            model.delete(clause, function(results, err) {
+                if(!err && results.affectedRows != 0) {
+                    res.sendFile(rootPath+"/index.html");
+                } else {
+                    err.addMessage("404", "User not found");
+                    err.sendErrors(res, 404);
+                }
+            });
+        });
     }
-};
+
+module.exports = users;

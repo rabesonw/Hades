@@ -7,7 +7,7 @@ var auth = require("../middlewares/auth");
  * add tables when ambiguity as albums.albumId
  */
 
-exports.search = {
+var search = {};
 
     /**
      * select songId, songTitle, albumId, albumAuthor
@@ -15,7 +15,7 @@ exports.search = {
      * where songTitle like req.body
      * and songs.albumId = albums.albumId
      */
-    searchSongs = function(req, res, next) {
+    search.searchSongs = function(req, res, next) {
         let fields = ["songId", "songTitle", "albumId", "albumAuthor"];
         let clause = {"songTitle": req.body, "songs.albumId": "albums.albumId"};
         model.readSearch(fields, clause, function(results, err) {
@@ -33,7 +33,7 @@ exports.search = {
      * from users
      * where pseudo like req.body
      */
-    .searchUsers = function(req, res, next) {
+    search.searchUsers = function(req, res, next) {
         let table = ["users"];
         let model = require("../db/models/model")(table);
         let fields = ["pseudo"];
@@ -53,7 +53,7 @@ exports.search = {
      * from albums
      * where albumTitle like req.body
      */
-    .searchAlbums = function(req, res, next) {
+    search.searchAlbums = function(req, res, next) {
         let table = ["albums"];
         let model = require("../db/models/model")(table);
         let fields = ["*"];
@@ -71,7 +71,7 @@ exports.search = {
     /**
      * 
      */
-    .search = function(req, res) {
+    search.search = function(req, res) {
         let jsonResults = {};
         searchAlbums(req, res, function(results, err) {
             jsonResults["albumResults"] = results;
@@ -80,7 +80,7 @@ exports.search = {
                 searchSongs(req, res, function(results, err) {
                     jsonResults["songResults"] = results;
                     if(!err && results.length >= 0) {
-                        res.json(results);
+                        res.json(jsonResults);
                     } else {
                         error.addMessage("409", "Query failed");
                         error.sendErrors(res, 404);
@@ -90,4 +90,4 @@ exports.search = {
         });
     }
 
-};
+module.exports = search;
