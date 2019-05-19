@@ -1,7 +1,7 @@
 var table = ["songs", "albums"];
-var model = require("../db/models/model")(table);
-var error = require("../middlewares/error");
-var auth = require("../middlewares/auth");
+var model = require(rootPath+"/db/models/model")(table);
+var error = require(rootPath+"/middlewares/error");
+var auth = require(rootPath+"/middlewares/auth");
 
 /**
  * add tables when ambiguity as albums.albumId
@@ -26,7 +26,7 @@ var search = {};
                 error.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * select pseudo
@@ -46,7 +46,7 @@ var search = {};
                 error.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * select *
@@ -66,7 +66,7 @@ var search = {};
                 error.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * 
@@ -93,6 +93,6 @@ var search = {};
                 });
             });
         });
-    }
+    };
 
 module.exports = search;

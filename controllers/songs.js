@@ -1,7 +1,7 @@
 var table = "songs";
-var model = require("../db/models/model")(table);
-var auth = require("../middlewares/auth");
-var pageName = require("../middlewares/page");
+var model = require(rootPath+"/db/models/model")(table);
+var auth = require(rootPath+"/middlewares/auth");
+var pageName = require(rootPath+"/middlewares/page");
 
 var songs = {};
 
@@ -18,7 +18,7 @@ var songs = {};
                 songs: results
             }); 
         });
-    }
+    };
 
     /**
      * insert into songs (songTitle, songDetails, albumId, genreId)
@@ -32,7 +32,7 @@ var songs = {};
                 });  
             }
         });
-    }
+    };
 
     /**
      * insert into play values (songId, playlistId)
@@ -45,7 +45,7 @@ var songs = {};
                 errors.addMessage("400", "Failed to add song");
             }
         })
-    }
+    };
 
     songs.getSong = function (req, res) {
         let fields = ["songId", "songTitle"];
@@ -61,7 +61,7 @@ var songs = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
    songs.updateSong = function (req, res) {
         var clause = {"songId": req.idSong};
@@ -76,7 +76,7 @@ var songs = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     songs.deleteSong = function (req, res) {
         let clause = {"songId": req.idSong};
@@ -91,6 +91,6 @@ var songs = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
 module.exports = songs;

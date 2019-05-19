@@ -78,9 +78,9 @@ create table follow(
 
 -- t_songs_albums
 -- a trigger to remove an album when its last song has been removed
-create trigger t_songs_albums 
-after delete on songs
-begin
+-- create trigger t_songs_albums 
+-- after delete on songs
+-- begin
     
 
 -- t_playlists_users

@@ -1,6 +1,6 @@
 var table = "follow";
-var model = require("../db/models/model")(table);
-var auth = require("../middlewares/auth");
+var model = require(rootPath+"/db/models/model")(table);
+var auth = require(rootPath+"/middlewares/auth");
 var pageName = require(rootPath+"/middlewares/auth");
 
 var followers = {};
@@ -29,7 +29,7 @@ var followers = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * inserts new row in table follow
@@ -51,7 +51,7 @@ var followers = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * gets id of follower
@@ -73,7 +73,7 @@ var followers = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     followers.deleteFollower = function (req, res) {
         let clause = {"followerId": req.idFollower};
@@ -89,6 +89,6 @@ var followers = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
 module.exports = followers;

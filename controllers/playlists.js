@@ -23,7 +23,7 @@ var playlists = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     playlists.addPlaylist = function (req, res) {
         model.create(req.body, function(results, err) {
@@ -34,7 +34,7 @@ var playlists = {};
                 });  
             }
         });
-    }
+    };
 
     /**
      * get all songIds from playlist playlistId
@@ -59,7 +59,7 @@ var playlists = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * update playlist set playlistName = :new, playlistDesc = :new
@@ -77,7 +77,7 @@ var playlists = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * delete from playlist where playlistId = req.idPlaylist
@@ -95,6 +95,6 @@ var playlists = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
 module.exports = playlists;

@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-var playlists = require("../controllers/playlists");
-var auth = require("../middlewares/auth");
-var users = require("./index");
+var playlists = require(rootPath+"/controllers/playlists");
+var auth = require(rootPath+"/middlewares/auth");
+
 
 /*
     idPlaylist for other resources

@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var albums = require("../controllers/albums");
-var auth = require("../middlewares/auth");
-var users = require("./index");
+var albums = require(rootPath+"/controllers/albums");
+var auth = require(rootPath+"/middlewares/auth");
 
 /*
     idAlbum for other resources

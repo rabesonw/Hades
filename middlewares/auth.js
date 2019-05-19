@@ -1,10 +1,9 @@
-dotenv.config();
-
 var table = "users";
-var model = require("../db/models/model");
+var model = require(rootPath+"/db/models/model")(table);
 var crypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
-var errorHandler = require("../middlewares/error");
+var errorHandler = require(rootPath+"/middlewares/error");
+var secret = require(rootPath+"/config/config").secret;
 
 var auth = {};
 
@@ -26,7 +25,7 @@ auth.checkToken = function(req, res, next) {
     if(!req.token) {
         console.log("Notok");
     } else {
-        jwt.verify(req.token, process.env.SECRET, function(err, data) {
+        jwt.verify(req.token, secret.SECRET, function(err, data) {
             if(err) {
                 errorHandler.addMessage("403", "Forbidden - Invalid token");
             } else {
@@ -46,34 +45,48 @@ auth.validateToken = function(req, res, next) {
 }
 
 auth.login = function(req, res, next) {
-    var pseudo = req.body.idUser;
-    var pwd = req.body.userPwd;
+    let errors = errorHandler();
 
+    var pseudo = req.body.pseudo;
+    var pwd = req.body.userPwd;
+    
     /**
      * query parts :
      * select pseudo, email, pwd
      * from users u
      * where u.pseudo = pseudo
      */
-    var columns = ["pseudo", "userEmail", "userPwd"];
+    var columns = ["*"];
     var clause = {"pseudo": pseudo};
 
-    model(table).read(columns, clause, function (results, error) {
-        if (!error && results.length > 0) {
-            // password is correct
+    model.read(columns, clause, function (results, error) {
+
+        if (error == null && results.length > 0) {
+            const userTok = {
+                pseudo: results[0].pseudo
+            }
+
+            // check if password is correct
             crypt.compare(pwd, results[0].userPwd, function(error, resCrypt) {
+            console.log("auth.log model.read cryptRes : "+resCrypt);
                 if (resCrypt) {
-                    jwt.sign({pseudo: results[0].pseudo}, process.env.SECRET, function(error, token) {
-                        res.json({token});
+                    jwt.sign({userTok}, "moqziehbmoi543efqsoiQSDFEhbqmzjfDQSDF", function(error, token) {
+                        // res.json({user, token});
+                        console.log("auth model.read crypt.compare results.pseudo : "+results[0].pseudo);
+                        res.render("user", {
+                            info: results[0],
+                            status: true,
+                            token: {userTok, token}
+                        })
                     });
                 } else {
-                    errorHandler.addMessage("407", "Invalid Password");
-                    errorHandler.sendError(res, 403);
+                    errors.addMessage("407", "Invalid Password");
+                    errors.sendErrors(res, 403);
                 }
-            })
+            });
         } else {
-            errorHandler.addMessage("406", "Invalid Pseudo");
-            errorHandler.sendError(res, 403);
+            errors.addMessage("406", "Invalid Pseudo");
+            errors.sendErrors(res, 403);
         }
     })
 };

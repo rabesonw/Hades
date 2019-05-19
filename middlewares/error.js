@@ -1,20 +1,30 @@
-exports.errors = function() {
-    err = {
+module.exports = function() {
+
+    var errors = {};
+
+    errors.err = {
         errors: []
     };
 
-    sendErrors = function(res, code) {
-        res.status(code).json(err);
+    console.log("errors : "+errors.err.errors);
+
+    errors.sendErrors = function(res, code) {
+        res.status(code).render("error", {
+            code: code,
+            message: errors.err.errors[0].message
+        });
     }
 
-    addMessage = function(code, message) {
-        err.errors.push({
+    errors.addMessage = function(code, message) {
+        errors.err.errors.push({
             code: code,
             message: message
         });
     }
 
-    defined = function() {
-        return (err.errors.length > 0);
+    errors.defined = function() {
+        return (errors.err.errors.length > 0);
     }
+
+    return errors;
 }

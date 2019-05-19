@@ -1,8 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var follower = require("../controllers/followers");
-var auth = require("../middlewares/auth");
-var users = require("./index");
+var follower = require(rootPath+"/controllers/followers");
+var auth = require(rootPath+"/middlewares/auth");
 
 /*
     idFollower for other resources

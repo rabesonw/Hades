@@ -1,10 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var songs = require("../controllers/songs");
-var users = require("./index");
-var playlists = require("../controllers/playlists");
+var songs = require(rootPath+"/controllers/songs");
+var playlists = require(rootPath+"/controllers/playlists");
 // var play = require("../controllers/play"); pour le futur controller play
-var auth = require("../middlewares/auth");
+var auth = require(rootPath+"/middlewares/auth");
 
 /*
     idSong for other resources

@@ -1,18 +1,23 @@
-dotenv.config();
-
 var mysql = require("mysql");
+
+var dbdata = require(rootPath+"/config/config").db;
 
 var connection = mysql.createConnection(
     {
-        host: process.env.HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_KEY,
-        database: process.env.DB_URL //path to database
+        host: dbdata.HOST,
+        user: dbdata.USER,
+        password: dbdata.DB_KEY,
+        database: dbdata.DB_NAME//path to database
     }
 );
 
-connection.connect(process.env.DB_URL,function (err) {
-    if (err) throw err;
+connection.connect(function (err) {
+    if (err) {
+        console.log("Connection to database unsuccessful");
+        throw err;
+    } else {
+        console.log("Connection to database successful");
+    }
 });
 
 module.exports = connection;

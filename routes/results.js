@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var search = require("../controllers/search");
+var search = require(rootPath+"/controllers/search");
 
 // /*
 //     idPlaylist for other resources

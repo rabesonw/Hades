@@ -1,7 +1,7 @@
 var table = "albums";
-var model = require("../db/models/model")(table);
-var auth = require("../middlewares/auth");
-var pageName = require("../middlewares/page");
+var model = require(rootPath+"/db/models/model")(table);
+var auth = require(rootPath+"/middlewares/auth");
+var pageName = require(rootPath+"/middlewares/page");
 
 var albums = {};
 
@@ -26,7 +26,7 @@ var albums = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     /**
      * insert into 
@@ -40,7 +40,7 @@ var albums = {};
                 });
             }
         });
-    }
+    };
 
     /**
      * select albumId, albumTitle
@@ -62,7 +62,7 @@ var albums = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     albums.updateAlbum = function (req, res) {
         let clause = {"albumId": req.idAlbum};
@@ -77,7 +77,7 @@ var albums = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
     albums.deleteAlbum = function (req, res) {
         let clause = {"albumId": req.idAlbum};
@@ -92,6 +92,6 @@ var albums = {};
                 err.sendErrors(res, 404);
             }
         });
-    }
+    };
 
 module.exports = albums;
