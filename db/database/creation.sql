@@ -76,12 +76,35 @@ create table follow(
 
 -- triggers declarations 
 
+drop trigger if exists t_songs_albums;
+drop trigger if exists t_playlists_users;
+
 -- t_songs_albums
 -- a trigger to remove an album when its last song has been removed
--- create trigger t_songs_albums 
--- after delete on songs
--- begin
+delimiter //
+create trigger t_songs_albums 
+after delete on songs
+for each row
+begin
+    declare nbsong integer;
+
+    set nbsong = (select count(distinct songId)
+    from songs s, albums a 
+    where s.albumId = OLD.albumId);
+
+    if nbsong = 0 then
+        delete from albums 
+        where albumId = OLD.albumId;
+    end if;
+end //
     
 
 -- t_playlists_users
 -- a trigger to create a new playlist for liked songs when user creates an account
+delimiter //
+create trigger t_playlists_users
+after insert on users
+for each row
+begin
+    insert into playlists (playlistName, ownerId) values ('Liked Song', NEW.pseudo);
+end //
