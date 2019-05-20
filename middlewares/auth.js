@@ -23,7 +23,6 @@ auth.readToken = function(req, res, next) {
 
 auth.checkToken = function(req, res, next) {
     if(!req.token) {
-        console.log("Notok");
     } else {
         jwt.verify(req.token, secret.SECRET, function(err, data) {
             if(err) {
@@ -68,11 +67,9 @@ auth.login = function(req, res, next) {
 
             // check if password is correct
             crypt.compare(pwd, results[0].userPwd, function(error, resCrypt) {
-            console.log("auth.log model.read cryptRes : "+resCrypt);
                 if (resCrypt) {
                     jwt.sign({userTok}, "moqziehbmoi543efqsoiQSDFEhbqmzjfDQSDF", function(error, token) {
                         // res.json({user, token});
-                        console.log("auth model.read crypt.compare results.pseudo : "+results[0].pseudo);
                         res.render("user", {
                             info: results[0],
                             status: true,

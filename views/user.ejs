@@ -2,195 +2,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Site made with Mobirise Website Builder v4.10.0, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v4.10.0, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/mbr-122x244.jpg" type="image/x-icon">
-  <meta name="description" content="Web Page Generator Description">
-  
-  <title>
-      Hades : <%= info.pseudo %>
-    </title>
-  <link rel="stylesheet" href="assets/tether/tether.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/socicon/css/styles.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
-  
-  
-  
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Hades</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- APlayer CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/clean-blog.min.css" rel="stylesheet">
+
 </head>
 <body>
 
-        <% include ./global/header %>
- 
-<section class="engine"><a href="https://mobirise.info/n">free simple web templates</a></section><section class="testimonials2 cid-rqAshNPiXv" id="testimonials2-g">
-
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Hades</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSearch" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Search
+        <i class="fas fa-bars"></i>
+      </button>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
     <div class="container">
-        <div class="media-container-row">
-            <div class="mbr-figure pr-lg-5" style="width: 30%;">
-              <img src="assets/images/50751114-1144842132349782-3612708365186105344-n-658x658.jpg" alt="" title="">
-            </div>
-            <div class="media-content px-3 align-self-center mbr-white py-2">
-                    <p class="mbr-text testimonial-text mbr-fonts-style display-2">
-                        <span style="font-style: normal;"><%= info.pseudo %></span>
-                        <img src="" class="verified" alt="" title="verified">
-                    </p>
-                    <p class="mbr-author-name pt-4 mb-2 mbr-fonts-style display-7"><span style="font-weight: normal;">
-                       <%= info.userName %></span></p>
-                    <p class="mbr-author-desc mbr-fonts-style display-7">
-                       <%= info.userBio %></p>
-            </div>
+      <div class="navbar-nav ml-auto">
+        <div id="player" class="aplayer">
+          Player
         </div>
+      </div>
     </div>
-</section>
+      <div class="collapse navbar-collapse" id="navbarSearch">
+          <form class="form-inline">
+              <div class="navbar-nav ml-auto">
+                <div class="nav-item md-form mt-0">
+                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">          
+                </div>
+              </div>
+          </form>
+      </div>
+      <div class="container"></div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/connect">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/join">Sign in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
 
+ <header class="masthead" data-parallax="true" style="background-image:url('assets/img/cerberus.jpg')">
+    <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+	                <div class="col-md-6 ml-auto mr-auto">
+        	           <div class="site-heading">
+	                        <div class="avatar">
+	                            <img src="assets/img/hades.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+	                        </div>
+	                        <div class="subheading">
+	                            <h1><%= info.pseudo %></h1>
+								<span class="subheading"><%= info.userName %></span>
+                                <span class="subheading"><%= info.userBio %></p>
+	                        </div>
+	                    </div>
+    	            </div>
+                </div>
+    </div>
+</header> 
 
+  <div class="album py-5 bg-light">
+        <div class="container">
 
-<section class="features18 popup-btn-cards cid-rqAticnhXu" id="features18-h">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="https://media.pitchfork.com/photos/5b27cb06c87cd85577eaf7a4/1:1/w_320/Beyonce%CC%81,%20JAY-Z%20-%20Everything%20Is%20Love.jpg" alt="Everything Is Love">
+                <div class="card-body">
+                  <p class="card-text">Everything Is Love</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Play</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="https://oyster.ignimgs.com/wordpress/stg.ign.com/2018/01/panther-720x720.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Black Panther</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Play</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="https://groundzero.fr/14023-thickbox_default/orelsan-la-fete-est-finie-lp.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">La Fête Est Finie</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Play</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="https://ionecassius.files.wordpress.com/2018/02/15193209489599.jpg?w=1024&quality=80&strip=all&h=1024" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Dirty Computer</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Play</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="https://is2-ssl.mzstatic.com/image/thumb/Music118/v4/f7/17/f3/f717f341-5e29-9eb7-206f-d970cfe3e517/source/1200x1200bb.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Amala (Deluxe Edition)</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Play</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="http://www.musewiki.org/images/thumb/The_Resistance.jpg/300px-The_Resistance.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">The Resistance</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Play</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
 
-    
+<!-- Footer -->
+  <footer>
     <div class="container">
-        
-        <h3 class="mbr-section-subtitle display-5 align-center mbr-fonts-style mbr-light">Albums</h3>
-        <div class="media-container-row pt-5 ">
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper ">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center">
-                            <a href="#" class="btn btn-secondary display-4">Play</a>
-                        </div>
-                        <img src="assets/images/220px-amala-220x220.jpg" alt="Mobirise" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Amala</h4>
-                        <p class="mbr-text mbr-fonts-style align-left display-7">
-                            Doja Cat</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a href="#" class="btn btn-secondary display-4">Play</a></div>
-                        <img src="assets/images/220px-dirtycomputer-220x220.png" alt="Mobirise" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Dirty Computer</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                           Janelle Monae</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a href="#" class="btn btn-secondary display-4">Play</a></div>
-                        <img src="assets/images/220px-the-carters-everything-is-love-official-album-cover-220x220.png" alt="Mobirise" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">Everything Is Love</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            The Carters</p>
-                    </div>
-                </div>
-            </div>
-
-            
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
         </div>
+      </div>
     </div>
-</section>
-
-<section class="features18 popup-btn-cards cid-rqAtrNILMU" id="features18-i">
-
-    
-
-    
-    <div class="container">
-        
-        <h3 class="mbr-section-subtitle display-5 align-center mbr-fonts-style mbr-light">Playlists</h3>
-        <div class="media-container-row pt-5 ">
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper ">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a href="#" class="btn btn-secondary display-4">Play</a></div>
-                        <img src="assets/images/220px-amala-220x220.jpg" alt="Mobirise" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Amala</h4>
-                        <p class="mbr-text mbr-fonts-style align-left display-7">
-                            Doja Cat</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a href="#" class="btn btn-secondary display-4">Play</a></div>
-                        <img src="assets/images/220px-dirtycomputer-220x220.png" alt="Mobirise" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Dirty Computer</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                           Janelle Monae</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <div class="mbr-overlay"></div>
-                        <div class="mbr-section-btn text-center"><a href="#" class="btn btn-secondary display-4">Play</a></div>
-                        <img src="assets/images/220px-the-carters-everything-is-love-official-album-cover-220x220.png" alt="Mobirise" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">Everything Is Love</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            The Carters</p>
-                    </div>
-                </div>
-            </div>
-
-            
-        </div>
-    </div>
-</section>
-
-<% include ./global/footer %>
+  </footer>
 
 
-  <script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/popper/popper.min.js"></script>
-  <script src="assets/tether/tether.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  <script src="assets/dropdown/js/script.min.js"></script>
-  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
-  <script src="assets/mbr-popup-btns/mbr-popup-btns.js"></script>
-  <script src="assets/theme/js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.6.0/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/color-thief-don@2.0.2/src/color-thief.js"></script>
-  <script src="js/aplayer.js"></script>
-  
+  <!-- Bootstrap core JavaScript -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="assets/js/clean-blog.min.js"></script>
+
+  <!-- APlayer JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="assets/js/aplayer.js"></script>
   
 </body>
 </html>

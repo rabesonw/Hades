@@ -2,75 +2,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Site made with Mobirise Website Builder v4.10.0, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v4.10.0, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/mbr-122x244.jpg" type="image/x-icon">
-  <meta name="description" content="Web Builder Description">
-  
-  <title>SongPage</title>
-  <link rel="stylesheet" href="assets/tether/tether.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
-  
-  
-  
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Hades</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- APlayer CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/clean-blog.min.css" rel="stylesheet">
+
 </head>
 <body>
-        <% include ./global/header %>
-
-<section class="engine"><a href="https://mobirise.info/f">easy web creator</a></section><section class="services2 cid-rqQemZf4uH mbr-parallax-background" id="services2-12">
-    <!---->
-    
-    <!---->
-    <!--Overlay-->
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(255, 255, 255);">
-    </div>
-    <!--Container-->
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#">Start Bootstrap</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSearch" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Search
+        <i class="fas fa-bars"></i>
+      </button>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
     <div class="container">
-        <div class="col-md-12">
-            <div class="media-container-row">
-                <div class="mbr-figure" style="width: 50%;">
-                    <img src="assets/images/220px-dirtycomputer-220x220.png" alt="Mobirise" title="">
-                </div>
-                <div class="align-left aside-content">
-                    <h2 class="mbr-title pt-2 mbr-fonts-style display-2">
-                        Dirty Computer</h2>
-                    <div class="mbr-section-text">
-                        <p class="mbr-text text1 pt-2 mbr-light mbr-fonts-style display-7">
-                            Janelle Monae - Song details</p>
-                        
-                    </div>
-                    <!--Btn-->
-                    <div class="mbr-section-btn pt-3 align-left"><a href="https://mobirise.co" class="btn btn-warning-outline display-4">
-                            Listen</a></div>
-                </div>
-            </div>
+      <div class="navbar-nav ml-auto">
+        <div id="player" class="aplayer">
+          Player
         </div>
+      </div>
     </div>
-</section>
-<% include ./global/footer %>
+      <div class="collapse navbar-collapse" id="navbarSearch">
+          <form class="form-inline">
+              <div class="navbar-nav ml-auto">
+                <div class="nav-item md-form mt-0">
+                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">          
+                </div>
+              </div>
+          </form>
+      </div>
+      <div class="container"></div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/connect">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/join">Sign in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 
-  <script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/popper/popper.min.js"></script>
-  <script src="assets/tether/tether.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  <script src="assets/dropdown/js/script.min.js"></script>
-  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
-  <script src="assets/parallax/jarallax.min.js"></script>
-  <script src="assets/theme/js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.6.0/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/color-thief-don@2.0.2/src/color-thief.js"></script>
-  <script src="js/aplayer.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="assets/js/clean-blog.min.js"></script>
+
+  <!-- APlayer JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="assets/js/aplayer.js"></script>
   
   
 </body>

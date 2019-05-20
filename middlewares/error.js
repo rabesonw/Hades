@@ -6,8 +6,6 @@ module.exports = function() {
         errors: []
     };
 
-    console.log("errors : "+errors.err.errors);
-
     errors.sendErrors = function(res, code) {
         res.status(code).render("error", {
             code: code,

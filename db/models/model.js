@@ -135,7 +135,6 @@ module.exports = function(table) {
         let sql = "select " + commaSeparator(fields) 
         + " from " + commaSeparator(table) 
         + clauseBuilderQuery(clause) + " ;";
-        console.log("query readAll : "+sql);
         connection.query(sql, function (error, results, fields) {
             if (error) {
                 throw error;
@@ -152,7 +151,6 @@ module.exports = function(table) {
         let sql = "select " + commaSeparator(fields) 
         + " from " + commaSeparator(table) 
         + clauseBuilderSearch(clause) + " ;";
-        console.log("query readSearch : "+sql);
         connection.query(sql, function (error, results, fields) {
             if (error) {
                 throw error;
@@ -169,7 +167,6 @@ module.exports = function(table) {
         let sql = "select " + commaSeparator(fields) 
         + " from " + commaSeparator(table) + " " 
         + clauseBuilderQuery(clause) + " ;";
-        console.log("query read : "+sql);
         connection.query(sql, function (error, results, fields) {
             // if (error) {
             //     throw error;
@@ -188,14 +185,10 @@ module.exports = function(table) {
         let sql = "insert into " + commaSeparator(table) 
         + " ("+ commaSeparator(columns) + ") values (" + commaSeparatorEscape(input) + ") " 
         + clauseBuilderQuery(clause) + ";";
-        console.log("query create : "+sql);
         connection.query(sql, function (error, results, fields) {
-            console.log("je fais une requête");
             if (error) {
-                console.log("model.create : NOT OK"+error.sqlMessage);
                 throw error;
             } else if (next) {
-                console.log("model.create : OK");
                 next(results, error);
             }
         });
@@ -208,7 +201,6 @@ module.exports = function(table) {
         let sql = "update " + commaSeparator(table) 
         + " set " + updateBuilder(values) 
         + clauseBuilderQuery(clause) + ";";
-        console.log("query update : "+sql);
         connection.query(sql, function (error, results, fields) {
             if (error) {
                 throw error;
@@ -224,7 +216,6 @@ module.exports = function(table) {
     model.delete = function (clause, next) {
         let sql = "delete from " + commaSeparator(table) 
         + clauseBuilderQuery(clause);
-        console.log("query delete : "+sql);
         connection.query(sql, function (error, results, fields) {
             if (error) {
                 throw error;

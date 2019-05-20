@@ -53,8 +53,10 @@ var users = {};
         
         if (error.defined()) {
             error.sendErrors(res, 400);
+        } else {
+            next();
         }
-        next();
+ 
     };
 
     users.checkUser = function (req, res, next) {
@@ -84,7 +86,6 @@ var users = {};
                 req.body.userPwd = hash;
                 model.create(req.body, {},function(results, err) {
                     if(!err && results.affectedRows != 0) {
-                        console.log("crypted pwd : "+req.body[0]);
                         const userTok = {
                             pseudo: req.body.pseudo
                         }

@@ -29,9 +29,9 @@ router.get("/join", function(req, res, next) {
     });  
 });
 
-router.route("/users")
-.get(users.getAllUsers)
-.post(users.addUser);
+// router.route("/users")
+// .get(users.getAllUsers)
+// .post(users.addUser);
 
 
 console.log("root/idUser : START");
